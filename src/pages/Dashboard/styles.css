@@ -1,0 +1,177 @@
+/* Estructura principal */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+
+/* Barra lateral */
+.sidebar {
+  width: 250px;
+  background: #FAFAFB;
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Separa el menú y el perfil */
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-menu-item {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+  color: #565E6C;
+  background: none;
+  border: none;
+}
+
+.sidebar-menu-item:hover {
+  background: #f0f0f5;
+}
+
+.sidebar-menu-item .icon {
+  margin-right: 8px;
+}
+
+.sidebar-menu-item.selected {
+  font-weight: bold;
+  color: #2C35E0;
+  background: #E0E3FF;
+}
+
+/* Sección de perfil */
+.sidebar-profile {
+  margin-top: auto; /* Coloca el perfil en la parte inferior */
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0; /* Línea separadora */
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.profile-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #2C35E0;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: #565E6C;
+}
+
+/* Botón de logout */
+.logout-button {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2C35E0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #1f28b4;
+}
+
+.logout-button .icon {
+  margin-right: 8px;
+}
+
+/* Contenedor del formulario */
+.form-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Título del formulario */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2C35E0;
+}
+
+/* Diseño del formulario */
+.form {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Filas del formulario */
+.form-row {
+  display: flex;
+  gap: 30px; /* Espacio entre los campos */
+  margin-bottom: 16px;
+}
+
+/* Campos del formulario */
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas */
+.form-field label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #565E6C;
+}
+
+/* Inputs */
+.form-field input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Botón de guardar */
+.save-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #2C35E0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-button .icon {
+  margin-left: 8px;
+}
+
+.save-button:hover {
+  background-color: #1f28b4;
+}

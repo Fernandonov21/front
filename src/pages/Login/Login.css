@@ -1,0 +1,122 @@
+/* General Container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f6fa;
+}
+
+.login-container.unique-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f6fa;
+}
+
+/* Inner Container */
+.inner-container {
+    display: flex;
+    width: 900px; /* Ajusted width */
+    height: 500px; /* Adjusted height */
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Section - Left (Larger Section) */
+.container.secondary {
+    flex: 3; /* Makes this section take 3 parts */
+    padding: 40px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 16px 0 0 16px;
+}
+
+.login-form h2 {
+    font-family: Archivo, sans-serif;
+    font-size: 28px; /* Adjusted font size */
+    font-weight: 700;
+    color: #171a1f;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #171a1f;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    outline: none;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    background: #ffffff;
+    box-shadow: 0 0 0 2px #636ae8;
+}
+
+.form-group input::placeholder {
+    color: #a0aec0; /* Light gray color for placeholder text */
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    background: #636ae8;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-button:hover {
+    background: #4850e4;
+}
+
+.login-button:active {
+    background: #2c35e0;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Image Section - Right (Smaller Section) */
+.image {
+    flex: 3; /* Makes this section take 2 parts */
+    background: #636AE8EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 16px 16px 0;
+}
+
+.image img {
+    max-width: 80%;
+    height: auto;
+}

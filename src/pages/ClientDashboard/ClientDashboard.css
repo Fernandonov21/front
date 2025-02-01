@@ -1,0 +1,138 @@
+.app-container.client-dashboard {
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+
+.content-container.client-dashboard {
+  flex: 1;
+  padding: 20px;
+}
+
+.user-detail-container.client-dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.user-detail.client-dashboard {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row.client-dashboard {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 16px;
+}
+
+.form-field.client-dashboard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field.client-dashboard label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #565E6C;
+}
+
+.form-field.client-dashboard input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.save-button.client-dashboard, .edit-button.client-dashboard, .delete-button.client-dashboard {
+  width: 100%;
+  padding: 12px;
+  background-color: #2C35E0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.save-button.client-dashboard:hover, .edit-button.client-dashboard:hover, .delete-button.client-dashboard:hover {
+  background-color: #1f28b4;
+}
+
+.modal-overlay.client-dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal.client-dashboard {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal.client-dashboard h2 {
+  margin-bottom: 20px;
+  color: #e74c3c;
+}
+
+.modal.client-dashboard p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal.client-dashboard button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.modal.client-dashboard button:first-of-type {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.modal.client-dashboard button:first-of-type:hover {
+  background-color: #c0392b;
+}
+
+.modal.client-dashboard button:last-of-type {
+  background-color: #ccc;
+}
+
+.modal.client-dashboard button:last-of-type:hover {
+  background-color: #999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

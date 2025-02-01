@@ -1,0 +1,203 @@
+.list-container {
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2C35E0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.error {
+  color: red;
+  margin-bottom: 20px;
+}
+
+/* Estructura principal */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+
+/* Barra lateral */
+.sidebar {
+  width: 250px;
+  background: #FAFAFB;
+  padding: 20px;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-menu-item {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+  color: #565E6C;
+  background: none;
+  border: none;
+}
+
+.sidebar-menu-item:hover {
+  background: #f0f0f5;
+}
+
+.sidebar-menu-item.selected {
+  font-weight: bold;
+  color: #2C35E0;
+  background: #E0E3FF;
+}
+
+.sidebar-menu-item .icon {
+  margin-right: 8px;
+}
+
+/* Sección de perfil */
+.sidebar-profile {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.profile-name {
+  font-weight: bold;
+  font-size: 16px;
+  color: #2C35E0;
+}
+
+.profile-email {
+  font-size: 14px;
+  color: #565E6C;
+}
+
+/* Botón de logout */
+.logout-button {
+  width: 100%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2C35E0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #1f28b4;
+}
+
+.logout-button .icon {
+  margin-right: 8px;
+}
+
+/* Contenedor de la lista */
+.list-container {
+  flex: 1;
+  padding: 40px;
+  background: #f9f9f9;
+  margin-left: 260px; /* Adjust for the fixed sidebar width */
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2C35E0;
+}
+
+/* Tabla de usuarios */
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.user-table th {
+  background-color: #2C35E0;
+  color: white;
+  font-weight: bold;
+}
+
+.user-table tbody tr:hover {
+  background-color: #f0f0f5;
+}
+
+/* Botón para desplegar direcciones */
+.toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2C35E0;
+  font-size: 16px;
+}
+
+/* Direcciones asociadas */
+.address-row {
+  background-color: #f9f9f9;
+}
+
+.addresses {
+  padding: 12px;
+}
+
+.addresses h4 {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: #2C35E0;
+}
+
+.addresses ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.addresses li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.addresses li:last-child {
+  border-bottom: none;
+}

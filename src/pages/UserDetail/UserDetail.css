@@ -1,0 +1,351 @@
+/* Estructura principal */
+.app-container {
+    display: flex;
+    min-height: 100vh; /* Ensure the container takes at least full height */
+    background: #fff;
+}
+  
+/* Barra lateral */
+.sidebar {
+    width: 250px;
+    background: #FAFAFB;
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure the profile section stays at the bottom */
+    height: 100vh; /* Ensure the sidebar takes full height */
+    position: fixed; /* Fix the sidebar position */
+    top: 0;
+    left: 0;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Ensure the content takes available space */
+}
+  
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+  
+.sidebar-menu-item {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    color: #565E6C;
+    background: none;
+    border: none;
+}
+  
+.sidebar-menu-item:hover {
+    background: #f0f0f5;
+}
+  
+.sidebar-menu-item.selected {
+    font-weight: bold;
+    color: #2C35E0;
+    background: #E0E3FF;
+}
+  
+.sidebar-menu-item .icon {
+    margin-right: 8px;
+}
+  
+/* Sección de perfil */
+.sidebar-profile {
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    margin-bottom: 22px; /* Add bottom margin */
+}
+  
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+  
+.profile-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #2C35E0;
+}
+  
+.profile-email {
+    font-size: 14px;
+    color: #565E6C;
+}
+  
+/* Botón de logout */
+.logout-button {
+    width: 100%;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2C35E0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.logout-button:hover {
+    background-color: #1f28b4;
+}
+  
+.logout-button .icon {
+    margin-right: 8px;
+}
+  
+/* Contenedor del detalle */
+.detail-container {
+    flex: 1;
+    padding: 40px;
+    background: #f9f9f9;
+    margin-left: 250px; /* Adjust for the fixed sidebar width */
+    min-height: 100vh; /* Ensure the detail container takes at least full height */
+}
+  
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2C35E0;
+}
+  
+/* Detalle del usuario */
+.user-detail {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+  
+/* Filas del formulario */
+.form-row {
+    display: flex;
+    gap: 20px; /* Espacio entre las columnas */
+    margin-bottom: 16px;
+}
+  
+.form-field {
+    flex: 1; /* Cada campo ocupa el mismo espacio */
+    display: flex;
+    flex-direction: column;
+}
+  
+/* Labels más pequeños */
+.form-field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #565E6C;
+    font-size: 12px; /* Tamaño más pequeño */
+}
+  
+.form-field input {
+    width: 100%;
+    padding: 8px; /* Padding reducido */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #565E6C; /* Color gris */
+    background-color: #f9f9f9;
+}
+  
+.form-field input:read-only {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    color: #565E6C; /* Color gris */
+}
+  
+.form-field input:not(:read-only) {
+    color: #000000; /* Color negro cuando se puede editar */
+}
+  
+/* Botones */
+.edit-button, .save-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #2C35E0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+  
+.edit-button:hover, .save-button:hover {
+    background-color: #1f28b4;
+}
+  
+.back-button {
+    padding: 8px 16px;
+    background-color: #2C35E0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.back-button:hover {
+    background-color: #1f28b4;
+}
+  
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+  
+/* Sección de Direcciones */
+.direcciones-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+  
+.direcciones-container h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+  
+.add-direccion-button {
+    padding: 8px 16px;
+    background-color: #2C35E0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 16px;
+}
+  
+.add-direccion-button:hover {
+    background-color: #1f28b4;
+}
+  
+.direcciones-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.direcciones-table th,
+.direcciones-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+  
+.direcciones-table th {
+    background-color: #2C35E0;
+    color: white;
+    font-weight: bold;
+}
+  
+.direcciones-table tbody tr:hover {
+    background-color: #f0f0f5;
+}
+  
+.action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2C35E0;
+    font-size: 16px;
+    margin-right: 8px; /* Add space between buttons */
+}
+
+.action-button:last-child {
+    margin-right: 0; /* Remove margin for the last button */
+}
+
+.delete-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e02c2c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.delete-button:hover {
+    background-color: #b41f1f;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+  
+.confirm-button, .cancel-button, .save-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.confirm-button {
+    background-color: #e02c2c;
+    color: white;
+}
+  
+.confirm-button:hover {
+    background-color: #b41f1f;
+}
+  
+.cancel-button {
+    background-color: #ccc;
+    color: black;
+}
+  
+.cancel-button:hover {
+    background-color: #999;
+}
+  
+.save-button {
+    background-color: #2C35E0;
+    color: white;
+}
+  
+.save-button:hover {
+    background-color: #1f28b4;
+}
