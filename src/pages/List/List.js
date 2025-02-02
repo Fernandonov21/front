@@ -9,6 +9,7 @@ const List = () => {
   const [error, setError] = useState(null);
   const [expandedUserId, setExpandedUserId] = useState(null);
   const [addresses, setAddresses] = useState({});
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/list-users/`)
@@ -49,6 +50,12 @@ const List = () => {
     navigate(`/user/${userId}`);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const filteredUsers = users.filter(user => user.Cedula.includes(searchTerm));
+
   return (
     <div className="app-container">
       <div className="sidebar">
@@ -76,6 +83,13 @@ const List = () => {
       <div className="list-container">
         <h2>Lista de Usuarios</h2>
         {error && <p className="error">{error}</p>}
+        <input
+          type="text"
+          placeholder="Buscar por cédula"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          className="search-input"
+        />
         <table className="user-table">
           <thead>
             <tr>
@@ -87,7 +101,7 @@ const List = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
+            {filteredUsers.map(user => (
               <React.Fragment key={user.id}>
                 <tr className="user-row" onClick={() => handleUserClick(user.id)}>
                   <td>{user.Nombres} {user.Apellidos}</td>

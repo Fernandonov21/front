@@ -39,6 +39,10 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
     return Object.keys(newErrors).length === 0;
   };
 
+  const handleInputChange = (field, value) => {
+    setAddress({ ...address, [field]: value.toUpperCase() });
+  };
+
   const handleSaveClick = () => {
     if (validateFields()) {
       handleSaveAddressClick({ ...address, id: addressId });
@@ -57,7 +61,7 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Calle}
-              onChange={(e) => setAddress({ ...address, Calle: e.target.value })}
+              onChange={(e) => handleInputChange('Calle', e.target.value)}
             />
             {errors.Calle && <span className="error">{errors.Calle}</span>}
           </div>
@@ -66,7 +70,7 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Numero}
-              onChange={(e) => setAddress({ ...address, Numero: e.target.value })}
+              onChange={(e) => handleInputChange('Numero', e.target.value)}
             />
             {errors.Numero && <span className="error">{errors.Numero}</span>}
           </div>
@@ -77,16 +81,16 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Ciudad}
-              onChange={(e) => setAddress({ ...address, Ciudad: e.target.value })}
+              onChange={(e) => handleInputChange('Ciudad', e.target.value)}
             />
             {errors.Ciudad && <span className="error">{errors.Ciudad}</span>}
           </div>
           <div className="form-field">
-            <label>Estado</label>
+            <label>Estado/Provincia</label>
             <input
               type="text"
               value={address.Estado}
-              onChange={(e) => setAddress({ ...address, Estado: e.target.value })}
+              onChange={(e) => handleInputChange('Estado', e.target.value)}
             />
             {errors.Estado && <span className="error">{errors.Estado}</span>}
           </div>
@@ -97,7 +101,7 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.CodigoPostal}
-              onChange={(e) => setAddress({ ...address, CodigoPostal: e.target.value })}
+              onChange={(e) => handleInputChange('CodigoPostal', e.target.value)}
             />
             {errors.CodigoPostal && <span className="error">{errors.CodigoPostal}</span>}
           </div>
@@ -106,7 +110,7 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Pais}
-              onChange={(e) => setAddress({ ...address, Pais: e.target.value })}
+              onChange={(e) => handleInputChange('Pais', e.target.value)}
             />
             {errors.Pais && <span className="error">{errors.Pais}</span>}
           </div>

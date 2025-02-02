@@ -23,21 +23,35 @@ const App = () => {
 
   const handleCedulaChange = (e) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value) && value.length <= 10) {
+    if (/^\d*$/.test(value)) {
       setCedula(value);
-    } else if (value.length > 10) {
-      toast.dismiss();
-      toast.error('La cédula debe tener 10 dígitos numéricos');
     }
   };
 
   const handleTelefonoChange = (e) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value) && value.length <= 10) {
+    if (/^\d*$/.test(value)) {
       setTelefono(value);
-    } else if (value.length > 10) {
+    }
+  };
+
+  const handleNombresChange = (e) => {
+    const value = e.target.value.toUpperCase();
+    if (/^[A-Z\s]*$/.test(value)) {
+      setNombres(value);
+    } else {
       toast.dismiss();
-      toast.error('El teléfono debe tener 10 dígitos numéricos');
+      toast.error('Los nombres no deben contener números');
+    }
+  };
+
+  const handleApellidosChange = (e) => {
+    const value = e.target.value.toUpperCase();
+    if (/^[A-Z\s]*$/.test(value)) {
+      setApellidos(value);
+    } else {
+      toast.dismiss();
+      toast.error('Los apellidos no deben contener números');
     }
   };
 
@@ -51,6 +65,21 @@ const App = () => {
       return;
     }
 
+    // Validar longitud de cédula y teléfono
+    if (cedula.length !== 10) {
+      setError('La cédula debe tener 10 dígitos numéricos');
+      return;
+    }
+
+    if (telefono.length !== 10) {
+      setError('El teléfono debe tener 10 dígitos numéricos');
+      return;
+    }
+
+    // Convertir nombres y apellidos a mayúsculas
+    const nombresUpper = nombres.toUpperCase();
+    const apellidosUpper = apellidos.toUpperCase();
+
     console.log("API URL:", process.env.REACT_APP_API_BASE_URL); // Depuración
 
     try {
@@ -60,8 +89,8 @@ const App = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          Nombres: nombres,
-          Apellidos: apellidos,
+          Nombres: nombresUpper,
+          Apellidos: apellidosUpper,
           Cedula: cedula,
           CorreoElectronico: correoElectronico,
           password: password,
@@ -137,7 +166,7 @@ const App = () => {
                   type="text"
                   placeholder="Nombres"
                   value={nombres}
-                  onChange={(e) => setNombres(e.target.value)}
+                  onChange={handleNombresChange}
                 />
               </div>
               <div className="form-field">
@@ -146,7 +175,7 @@ const App = () => {
                   type="text"
                   placeholder="Apellidos"
                   value={apellidos}
-                  onChange={(e) => setApellidos(e.target.value)}
+                  onChange={handleApellidosChange}
                 />
               </div>
             </div>
