@@ -33,7 +33,11 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
     if (!address.Numero) newErrors.Numero = 'Número es requerido';
     if (!address.Ciudad) newErrors.Ciudad = 'Ciudad es requerida';
     if (!address.Estado) newErrors.Estado = 'Estado es requerido';
-    if (!address.CodigoPostal) newErrors.CodigoPostal = 'Código Postal es requerido';
+    if (!address.CodigoPostal) {
+      newErrors.CodigoPostal = 'Código Postal es requerido';
+    } else if (!/^\d{6}$/.test(address.CodigoPostal)) {
+      newErrors.CodigoPostal = 'Código Postal debe ser de 6 dígitos numéricos';
+    }
     if (!address.Pais) newErrors.Pais = 'País es requerido';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -43,8 +47,12 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
     if (validateFields()) {
       handleSaveAddressClick({ ...address, id: addressId });
     } else {
-      toast.error('Por favor, complete todos los campos');
+      toast.error('Por favor, complete todos los campos correctamente');
     }
+  };
+
+  const handleInputChange = (field, value) => {
+    setAddress({ ...address, [field]: value.toUpperCase() });
   };
 
   return (
@@ -57,7 +65,7 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Calle}
-              onChange={(e) => setAddress({ ...address, Calle: e.target.value })}
+              onChange={(e) => handleInputChange('Calle', e.target.value)}
             />
             {errors.Calle && <span className="error">{errors.Calle}</span>}
           </div>
@@ -66,7 +74,7 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Numero}
-              onChange={(e) => setAddress({ ...address, Numero: e.target.value })}
+              onChange={(e) => handleInputChange('Numero', e.target.value)}
             />
             {errors.Numero && <span className="error">{errors.Numero}</span>}
           </div>
@@ -77,7 +85,12 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Ciudad}
-              onChange={(e) => setAddress({ ...address, Ciudad: e.target.value })}
+              onChange={(e) => handleInputChange('Ciudad', e.target.value)}
+              onKeyPress={(e) => {
+                if (!/[a-zA-Z\s]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
             {errors.Ciudad && <span className="error">{errors.Ciudad}</span>}
           </div>
@@ -86,7 +99,12 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Estado}
-              onChange={(e) => setAddress({ ...address, Estado: e.target.value })}
+              onChange={(e) => handleInputChange('Estado', e.target.value)}
+              onKeyPress={(e) => {
+                if (!/[a-zA-Z\s]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
             {errors.Estado && <span className="error">{errors.Estado}</span>}
           </div>
@@ -97,7 +115,16 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.CodigoPostal}
-              onChange={(e) => setAddress({ ...address, CodigoPostal: e.target.value })}
+              onChange={(e) => {
+                const value = e.target.value.replace(/\D/g, '');
+                handleInputChange('CodigoPostal', value);
+              }}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              maxLength="6"
             />
             {errors.CodigoPostal && <span className="error">{errors.CodigoPostal}</span>}
           </div>
@@ -106,7 +133,12 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <input
               type="text"
               value={address.Pais}
-              onChange={(e) => setAddress({ ...address, Pais: e.target.value })}
+              onChange={(e) => handleInputChange('Pais', e.target.value)}
+              onKeyPress={(e) => {
+                if (!/[a-zA-Z\s]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
             {errors.Pais && <span className="error">{errors.Pais}</span>}
           </div>
@@ -116,10 +148,10 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
             <label>Tipo de Dirección</label>
             <select
               value={address.tipo_direccion}
-              onChange={(e) => setAddress({ ...address, tipo_direccion: e.target.value })}
+              onChange={(e) => handleInputChange('tipo_direccion', e.target.value)}
             >
               {addressTypes.map(type => (
-                <option key={type.id} value={type.id}>{type.nombre}</option>
+                <option key={type.id} value={type.id}>{type.nombre.toUpperCase()}</option>
               ))}
             </select>
           </div>

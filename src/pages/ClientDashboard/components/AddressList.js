@@ -14,7 +14,7 @@ const AddressList = ({ direcciones, handleAddAddressClick, handleEditAddressClic
 
   const getAddressTypeName = (id) => {
     const type = addressTypes.find(type => type.id === id);
-    return type ? type.nombre : 'Desconocido';
+    return type ? type.nombre.toUpperCase() : 'DESCONOCIDO';
   };
 
   return (
