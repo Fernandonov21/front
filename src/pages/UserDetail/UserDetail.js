@@ -111,6 +111,11 @@ const UserDetail = () => {
     });
 };
 
+  const handleCancelEditClick = () => {
+    setIsEditing(false);
+    setPassword('');
+  };
+
   const handleDeleteClick = () => {
     setShowDeleteModal(true);
   };
@@ -242,6 +247,7 @@ const UserDetail = () => {
           handleEditClick={handleEditClick}
           handleSaveClick={handleSaveClick}
           handleDeleteClick={handleDeleteClick}
+          handleCancelEditClick={handleCancelEditClick} // Add cancel edit handler
         />
         <AddressList
           direcciones={direcciones}

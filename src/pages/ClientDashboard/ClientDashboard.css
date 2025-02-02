@@ -47,7 +47,7 @@
   width: 100%;
 }
 
-.save-button.client-dashboard, .edit-button.client-dashboard, .delete-button.client-dashboard {
+.save-button.client-dashboard, .edit-button.client-dashboard, .delete-button.client-dashboard, .cancel-button.client-dashboard {
   width: 100%;
   padding: 12px;
   background-color: #2C35E0;
@@ -60,8 +60,16 @@
   margin-top: 10px;
 }
 
-.save-button.client-dashboard:hover, .edit-button.client-dashboard:hover, .delete-button.client-dashboard:hover {
+.save-button.client-dashboard:hover, .edit-button.client-dashboard:hover, .delete-button.client-dashboard:hover, .cancel-button.client-dashboard:hover {
   background-color: #1f28b4;
+}
+
+.cancel-button.client-dashboard {
+  background-color: #ccc;
+}
+
+.cancel-button.client-dashboard:hover {
+  background-color: #999;
 }
 
 .modal-overlay.client-dashboard {
@@ -97,6 +105,12 @@
   margin-bottom: 20px;
   font-size: 16px;
   color: #333;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
 .modal.client-dashboard button {

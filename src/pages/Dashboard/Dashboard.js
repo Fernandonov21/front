@@ -84,7 +84,7 @@ const App = () => {
         if (errorData.Cedula) {
           setError('La cédula ya está registrada');
         } else if (errorData.CorreoElectronico) {
-          setError('El correo electrónico ya está registrado');
+          setError('Correo electrónico no es válido o ya está registrado');
         } else {
           setError(errorData.detail || 'Error al crear el usuario');
         }

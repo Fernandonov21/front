@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const UserForm = ({
   user,
@@ -10,8 +11,34 @@ const UserForm = ({
   handleEditClick,
   handleSaveClick,
   handleDeleteClick,
+  handleCancelEditClick,
 }) => {
   const handleSave = () => {
+    // Validations
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^\d{10}$/;
+    const nameRegex = /^[a-zA-Z\s]+$/;
+
+    if (!emailRegex.test(user.CorreoElectronico)) {
+      toast.error('El formato de correo electrónico es incorrecto o ya existe');
+      return;
+    }
+
+    if (!phoneRegex.test(user.TelefonoContacto)) {
+      toast.error('El teléfono debe tener 10 dígitos numéricos');
+      return;
+    }
+
+    if (!phoneRegex.test(user.Cedula)) {
+      toast.error('La cédula debe tener 10 dígitos numéricos');
+      return;
+    }
+
+    if (!nameRegex.test(user.Nombres) || !nameRegex.test(user.Apellidos)) {
+      toast.error('El nombre y apellido no deben contener números');
+      return;
+    }
+
     // Crear el objeto con los datos actualizados
     const updatedUser = {
       Nombres: user.Nombres,
@@ -19,12 +46,20 @@ const UserForm = ({
       Cedula: user.Cedula,
       CorreoElectronico: user.CorreoElectronico,
       TelefonoContacto: user.TelefonoContacto,
-      // Solo agregar la contraseña si se ha ingresado un valor
       ...(password && { password }),
     };
 
-    console.log('Datos que se enviarán al backend:', JSON.stringify(updatedUser)); // Log the JSON data
-    handleSaveClick(updatedUser); // Llamar a la función para guardar los cambios
+    console.log('Datos que se enviarán al backend:', JSON.stringify(updatedUser));
+    handleSaveClick(updatedUser);
+  };
+
+  const handleInputChange = (e, field) => {
+    const value = e.target.value;
+    if (field === 'Cedula' || field === 'TelefonoContacto') {
+      if (value.length > 10) return;
+      if (!/^\d*$/.test(value)) return;
+    }
+    setUser({ ...user, [field]: value });
   };
 
   return (
@@ -37,7 +72,7 @@ const UserForm = ({
               type="text"
               value={user.Nombres || ''}
               readOnly={!isEditing}
-              onChange={(e) => setUser({ ...user, Nombres: e.target.value })}
+              onChange={(e) => handleInputChange(e, 'Nombres')}
             />
           </div>
           <div className="form-field">
@@ -46,7 +81,7 @@ const UserForm = ({
               type="text"
               value={user.Apellidos || ''}
               readOnly={!isEditing}
-              onChange={(e) => setUser({ ...user, Apellidos: e.target.value })}
+              onChange={(e) => handleInputChange(e, 'Apellidos')}
             />
           </div>
         </div>
@@ -57,7 +92,7 @@ const UserForm = ({
               type="text"
               value={user.Cedula || ''}
               readOnly={!isEditing}
-              onChange={(e) => setUser({ ...user, Cedula: e.target.value })}
+              onChange={(e) => handleInputChange(e, 'Cedula')}
             />
           </div>
           <div className="form-field">
@@ -66,7 +101,7 @@ const UserForm = ({
               type="text"
               value={user.TelefonoContacto || ''}
               readOnly={!isEditing}
-              onChange={(e) => setUser({ ...user, TelefonoContacto: e.target.value })}
+              onChange={(e) => handleInputChange(e, 'TelefonoContacto')}
             />
           </div>
         </div>
@@ -74,10 +109,10 @@ const UserForm = ({
           <div className="form-field">
             <label>Email</label>
             <input
-              type="email" // Cambiado a type="email" para validación automática
+              type="email"
               value={user.CorreoElectronico || ''}
               readOnly={!isEditing}
-              onChange={(e) => setUser({ ...user, CorreoElectronico: e.target.value })}
+              onChange={(e) => handleInputChange(e, 'CorreoElectronico')}
             />
           </div>
         </div>
@@ -86,21 +121,26 @@ const UserForm = ({
             <label>Contraseña</label>
             <input
               type="password"
-              value={isEditing ? password : ''} // Mostrar vacío en modo edición
+              value={isEditing ? password : ''}
               readOnly={!isEditing}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder={isEditing ? 'Nueva contraseña' : ''} // Placeholder en modo edición
+              placeholder={isEditing ? 'Nueva contraseña' : ''}
             />
           </div>
         </div>
         {isEditing ? (
-          <button className="save-button" onClick={handleSave}>
-            GUARDAR
-          </button>
+          <>
+            <button className="save-button" onClick={handleSave}>
+              GUARDAR
+            </button>
+            <button className="cancel-button" onClick={handleCancelEditClick}>
+              CANCELAR
+            </button>
+          </>
         ) : (
           <>
             <button className="edit-button" onClick={() => {
-              setPassword(''); // Limpiar la contraseña al entrar en modo edición
+              setPassword('');
               handleEditClick();
             }}>
               <FaEdit /> EDITAR

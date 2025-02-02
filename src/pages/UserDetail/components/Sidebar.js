@@ -1,12 +1,21 @@
 import React from 'react';
-import { FaSignOutAlt, FaUsers } from 'react-icons/fa';
+import { FaSignOutAlt, FaUsers, FaRegAddressBook } from 'react-icons/fa';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ handleNavigateToDashboard, handleLogout }) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isUserDetailPage = location.pathname.startsWith('/user');
+
   return (
     <div className="sidebar">
       <div className="sidebar-content">
         <div className="sidebar-menu">
-          <button className="sidebar-menu-item selected">
+          <button className="sidebar-menu-item" onClick={() => navigate('/dashboard')}>
+            <FaRegAddressBook className="icon" />
+            <span>Registro</span>
+          </button>
+          <button className={`sidebar-menu-item ${isUserDetailPage ? 'selected' : ''}`}>
             <FaUsers className="icon" />
             <span>Usuarios</span>
           </button>
