@@ -17,6 +17,18 @@ function LoginClients({ onLogin }) {
   const [registerError, setRegisterError] = useState('');
   const navigate = useNavigate();
 
+  const handleNameChange = (setter) => (e) => {
+    const value = e.target.value.toUpperCase().replace(/[^A-Z\s]/g, '');
+    setter(value);
+  };
+
+  const handleNumericChange = (setter) => (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '');
+    if (value.length <= 10) {
+      setter(value);
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("API Base URL:", process.env.REACT_APP_API_BASE_URL);
@@ -49,6 +61,14 @@ function LoginClients({ onLogin }) {
     setRegisterError('');
     if (!nombres || !apellidos || !cedula || !CorreoElectronico || !telefono || !password) {
       setRegisterError('Todos los campos son obligatorios');
+      return;
+    }
+    if (cedula.length !== 10) {
+      setRegisterError('Formato de cédula incompleto. Debe tener exactamente 10 dígitos');
+      return;
+    }
+    if (telefono.length !== 10) {
+      setRegisterError('Formato de teléfono incompleto. Debe tener exactamente 10 dígitos');
       return;
     }
 
@@ -135,65 +155,71 @@ function LoginClients({ onLogin }) {
             <span className="modal-close" onClick={() => setShowModal(false)}>&times;</span>
             <h2 className="modal-title">Registro de Usuario</h2>
             <form onSubmit={handleRegister}>
-              <div className="modal-form-group">
-                <label htmlFor="nombres">Nombres:</label>
-                <input
-                  id="nombres"
-                  type="text"
-                  placeholder="Nombres"
-                  value={nombres}
-                  onChange={(e) => setNombres(e.target.value)}
-                />
+              <div className="form-row">
+                <div className="modal-form-group">
+                  <label htmlFor="nombres">Nombres:</label>
+                  <input
+                    id="nombres"
+                    type="text"
+                    placeholder="Nombres"
+                    value={nombres}
+                    onChange={handleNameChange(setNombres)}
+                  />
+                </div>
+                <div className="modal-form-group">
+                  <label htmlFor="apellidos">Apellidos:</label>
+                  <input
+                    id="apellidos"
+                    type="text"
+                    placeholder="Apellidos"
+                    value={apellidos}
+                    onChange={handleNameChange(setApellidos)}
+                  />
+                </div>
               </div>
-              <div className="modal-form-group">
-                <label htmlFor="apellidos">Apellidos:</label>
-                <input
-                  id="apellidos"
-                  type="text"
-                  placeholder="Apellidos"
-                  value={apellidos}
-                  onChange={(e) => setApellidos(e.target.value)}
-                />
+              <div className="form-row">
+                <div className="modal-form-group">
+                  <label htmlFor="cedula">Cédula:</label>
+                  <input
+                    id="cedula"
+                    type="text"
+                    placeholder="Cédula"
+                    value={cedula}
+                    onChange={handleNumericChange(setCedula)}
+                  />
+                </div>
+                <div className="modal-form-group">
+                  <label htmlFor="telefono">Teléfono:</label>
+                  <input
+                    id="telefono"
+                    type="text"
+                    placeholder="Teléfono"
+                    value={telefono}
+                    onChange={handleNumericChange(setTelefono)}
+                  />
+                </div>
               </div>
-              <div className="modal-form-group">
-                <label htmlFor="cedula">Cédula:</label>
-                <input
-                  id="cedula"
-                  type="text"
-                  placeholder="Cédula"
-                  value={cedula}
-                  onChange={(e) => setCedula(e.target.value)}
-                />
-              </div>
-              <div className="modal-form-group">
-                <label htmlFor="telefono">Teléfono:</label>
-                <input
-                  id="telefono"
-                  type="text"
-                  placeholder="Teléfono"
-                  value={telefono}
-                  onChange={(e) => setTelefono(e.target.value)}
-                />
-              </div>
-              <div className="modal-form-group">
-                <label htmlFor="register-email">Correo Electrónico:</label>
-                <input
-                  id="register-email"
-                  type="email"
-                  placeholder="user@gmail.com"
-                  value={CorreoElectronico}
-                  onChange={(e) => setCorreoElectronico(e.target.value)}
-                />
-              </div>
-              <div className="modal-form-group">
-                <label htmlFor="register-password">Password:</label>
-                <input
-                  id="register-password"
-                  type="password"
-                  placeholder="********"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+              <div className="form-row">
+                <div className="modal-form-group">
+                  <label htmlFor="register-email">Correo Electrónico:</label>
+                  <input
+                    id="register-email"
+                    type="email"
+                    placeholder="user@gmail.com"
+                    value={CorreoElectronico}
+                    onChange={(e) => setCorreoElectronico(e.target.value)}
+                  />
+                </div>
+                <div className="modal-form-group">
+                  <label htmlFor="register-password">Password:</label>
+                  <input
+                    id="register-password"
+                    type="password"
+                    placeholder="********"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
               </div>
               <button type="submit" className="modal-register-button">Registrar</button>
               {registerError && <p className="modal-error">{registerError}</p>}

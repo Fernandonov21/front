@@ -164,9 +164,18 @@
     padding: 30px;
     border-radius: 12px;
     width: 90%;
-    max-width: 500px;
+    max-width: 600px; /* Increased max-width for better centering */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto; /* Center the modal */
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 35px; /* Further increased margin-bottom for more spacing */
 }
 
 .modal-close {
@@ -194,6 +203,9 @@
 
 .modal-form-group {
     margin-bottom: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-form-group label {
@@ -206,7 +218,7 @@
 }
 
 .modal-form-group input {
-    width: 100%;
+    width: 90%; /* Reduced width for more separation */
     padding: 10px;
     font-family: Inter, sans-serif;
     font-size: 14px;
