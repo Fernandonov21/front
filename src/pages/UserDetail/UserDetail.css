@@ -3,6 +3,7 @@
     display: flex;
     min-height: 100vh; /* Ensure the container takes at least full height */
     background: #fff;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
   
 /* Barra lateral */
@@ -112,8 +113,9 @@
     flex: 1;
     padding: 40px;
     background: #f9f9f9;
-    margin-left: 250px; /* Adjust for the fixed sidebar width */
+    margin-left: 270px; /* Increase margin to create more space */
     min-height: 100vh; /* Ensure the detail container takes at least full height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
   
 h2 {

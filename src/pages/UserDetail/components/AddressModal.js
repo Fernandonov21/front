@@ -29,8 +29,16 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
 
   const validateFields = () => {
     const newErrors = {};
-    if (!address.Calle) newErrors.Calle = 'Calle es requerida';
-    if (!address.Numero) newErrors.Numero = 'Número es requerido';
+    if (!address.Calle) {
+      newErrors.Calle = 'Calle es requerida';
+    } else if (!/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]+$/.test(address.Calle)) {
+      newErrors.Calle = 'Calle solo puede contener letras, números, ñ y tildes';
+    }
+    if (!address.Numero) {
+      newErrors.Numero = 'Número es requerido';
+    } else if (!/^\d+$/.test(address.Numero)) {
+      newErrors.Numero = 'Número solo puede contener dígitos numéricos';
+    }
     if (!address.Ciudad) newErrors.Ciudad = 'Ciudad es requerida';
     if (!address.Estado) newErrors.Estado = 'Estado es requerido';
     if (!address.CodigoPostal) {
@@ -66,6 +74,11 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
               type="text"
               value={address.Calle}
               onChange={(e) => handleInputChange('Calle', e.target.value)}
+              onKeyPress={(e) => {
+                if (!/[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ\s]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
             {errors.Calle && <span className="error">{errors.Calle}</span>}
           </div>
@@ -75,6 +88,11 @@ const AddressModal = ({ address, setAddress, handleSaveAddressClick, setShowAddr
               type="text"
               value={address.Numero}
               onChange={(e) => handleInputChange('Numero', e.target.value)}
+              onKeyPress={(e) => {
+                if (!/[0-9]/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
             {errors.Numero && <span className="error">{errors.Numero}</span>}
           </div>

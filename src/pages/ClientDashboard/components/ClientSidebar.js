@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaSignOutAlt, FaUsers } from 'react-icons/fa';
+import './ClientSidebar.css';
 
 const ClientSidebar = ({ handleNavigateToDashboard, handleLogout }) => {
   const [userName, setUserName] = useState('');

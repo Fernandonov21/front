@@ -120,7 +120,7 @@ function ClientDashboard() {
     localStorage.removeItem('token');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user_id');
-    navigate('/loginclients');
+    navigate('/loginusers');
   };
 
   const handleDeleteClick = () => {
@@ -234,7 +234,7 @@ function ClientDashboard() {
       />
       <div className="content-container client-dashboard">
         <div className="user-detail-container client-dashboard">
-          <h1>Hola Cliente</h1>
+          <h1>BIENVENIDO</h1>
           {user ? (
             <>
               <UserForm
@@ -256,7 +256,7 @@ function ClientDashboard() {
               />
             </>
           ) : (
-            <p>No se pudo obtener la información del usuario.</p>
+            <p>Cargando.</p>
           )}
         </div>
       </div>

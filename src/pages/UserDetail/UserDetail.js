@@ -233,7 +233,7 @@ const UserDetail = () => {
       />
       <div className="detail-container">
         <div className="header">
-          <h2>Detalle del Cliente</h2>
+          <h2>Detalle del Usuario</h2>
           <button className="back-button" onClick={handleNavigateToUserList}>
             VOLVER A LA LISTA DE USUARIOS
           </button>

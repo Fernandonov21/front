@@ -28,6 +28,7 @@ const AddressList = ({ direcciones, handleAddAddressClick, handleEditAddressClic
           <tr>
             <th>TIPO DE DIRECCIÓN</th>
             <th>CALLE</th>
+            <th>NÚMERO</th>
             <th>CIUDAD</th>
             <th>PROVINCIA/ESTADO</th>
             <th>CODIGO POSTAL</th>
@@ -40,6 +41,7 @@ const AddressList = ({ direcciones, handleAddAddressClick, handleEditAddressClic
             <tr key={index}>
               <td>{getAddressTypeName(direccion.tipo_direccion)}</td>
               <td>{direccion.Calle}</td>
+              <td>{direccion.Numero}</td>
               <td>{direccion.Ciudad}</td>
               <td>{direccion.Estado}</td>
               <td>{direccion.CodigoPostal}</td>

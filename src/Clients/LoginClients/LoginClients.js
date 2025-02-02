@@ -9,6 +9,7 @@ function LoginClients({ onLogin }) {
   const [CorreoElectronico, setCorreoElectronico] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(''); // State to control success message
   const [showModal, setShowModal] = useState(false); // State to control modal visibility
   const [nombres, setNombres] = useState('');
   const [apellidos, setApellidos] = useState('');
@@ -18,7 +19,7 @@ function LoginClients({ onLogin }) {
   const navigate = useNavigate();
 
   const handleNameChange = (setter) => (e) => {
-    const value = e.target.value.toUpperCase().replace(/[^A-Z\s]/g, '');
+    const value = e.target.value.toUpperCase().replace(/[^A-ZÑÁÉÍÓÚÜ\s]/g, ''); // Allow 'Ñ' and accented characters
     setter(value);
   };
 
@@ -27,6 +28,36 @@ function LoginClients({ onLogin }) {
     if (value.length <= 10) {
       setter(value);
     }
+  };
+
+  const validateCedula = (cedula) => {
+    if (cedula.length !== 10) return false;
+  
+    const digito_region = cedula.substring(0, 2);
+    if (digito_region < 1 || digito_region > 24) return false;
+  
+    const ultimo_digito = parseInt(cedula.substring(9, 10));
+    const pares = parseInt(cedula.substring(1, 2)) + parseInt(cedula.substring(3, 4)) + parseInt(cedula.substring(5, 6)) + parseInt(cedula.substring(7, 8));
+  
+    const calculateImpar = (num) => {
+      num = num * 2;
+      return num > 9 ? num - 9 : num;
+    };
+  
+    const impares = calculateImpar(parseInt(cedula.substring(0, 1))) +
+                    calculateImpar(parseInt(cedula.substring(2, 3))) +
+                    calculateImpar(parseInt(cedula.substring(4, 5))) +
+                    calculateImpar(parseInt(cedula.substring(6, 7))) +
+                    calculateImpar(parseInt(cedula.substring(8, 9)));
+  
+    const suma_total = pares + impares;
+    const primer_digito_suma = parseInt(String(suma_total).substring(0, 1));
+    const decena = (primer_digito_suma + 1) * 10;
+    let digito_validador = decena - suma_total;
+  
+    if (digito_validador === 10) digito_validador = 0;
+  
+    return digito_validador === ultimo_digito;
   };
 
   const handleSubmit = async (event) => {
@@ -46,6 +77,22 @@ function LoginClients({ onLogin }) {
         localStorage.setItem('token', data.access);
         localStorage.setItem('user', JSON.stringify(data.user));
         localStorage.setItem('user_id', data.user_id);
+        setSuccess('Inicio de sesión exitoso'); // Set success message
+        toast.success('Inicio de sesión exitoso', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          style: {
+            backgroundColor: '#4caf50',
+            color: '#ffffff',
+            fontWeight: 'bold',
+          },
+          icon: '🚀',
+        });
         navigate('/clientdashboard');
       } else {
         const errorData = await response.json();
@@ -63,8 +110,8 @@ function LoginClients({ onLogin }) {
       setRegisterError('Todos los campos son obligatorios');
       return;
     }
-    if (cedula.length !== 10) {
-      setRegisterError('Formato de cédula incompleto. Debe tener exactamente 10 dígitos');
+    if (!validateCedula(cedula)) {
+      setRegisterError('Cédula incorrecta');
       return;
     }
     if (telefono.length !== 10) {
@@ -120,6 +167,7 @@ function LoginClients({ onLogin }) {
           <form onSubmit={handleSubmit} className="login-form">
             <h2>Sign in</h2>
             {error && <p className="error">{error}</p>}
+            {success && <p className="success">{success}</p>} {/* Display success message */}
             <div className="form-group">
               <label htmlFor="email">Correo Electrónico:</label>
               <input

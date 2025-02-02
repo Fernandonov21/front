@@ -6,6 +6,7 @@ function Login({ onLogin }) {
   const [CorreoElectronico, setCorreoElectronico] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(''); // New state for success message
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,13 +23,17 @@ function Login({ onLogin }) {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.access);
+        setSuccess('Login successful!'); // Set success message
+        setError(''); // Clear any previous error
         onLogin();
       } else {
         const errorData = await response.json();
         setError(errorData.detail || 'Login failed');
+        setSuccess(''); // Clear any previous success message
       }
     } catch (error) {
       setError('Failed to fetch');
+      setSuccess(''); // Clear any previous success message
     }
   };
 
@@ -39,6 +44,7 @@ function Login({ onLogin }) {
           <form onSubmit={handleSubmit} className="login-form">
             <h2>Sign in</h2>
             {error && <p className="error">{error}</p>}
+            {success && <p className="success">{success}</p>} {/* Display success message */}
             <div className="form-group">
               <label htmlFor="email">Correo Electrónico:</label>
               <input

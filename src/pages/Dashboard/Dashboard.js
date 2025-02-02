@@ -23,21 +23,53 @@ const App = () => {
 
   const handleCedulaChange = (e) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value)) {
+    if (/^\d*$/.test(value) && value.length <= 10) {
       setCedula(value);
+
+      if (value.length === 10) {
+        const digito_region = value.substring(0, 2);
+        if (digito_region >= 1 && digito_region <= 24) {
+          const ultimo_digito = value.substring(9, 10);
+          const pares = parseInt(value.substring(1, 2)) + parseInt(value.substring(3, 4)) + parseInt(value.substring(5, 6)) + parseInt(value.substring(7, 8));
+          let numero1 = value.substring(0, 1) * 2;
+          if (numero1 > 9) numero1 -= 9;
+          let numero3 = value.substring(2, 3) * 2;
+          if (numero3 > 9) numero3 -= 9;
+          let numero5 = value.substring(4, 5) * 2;
+          if (numero5 > 9) numero5 -= 9;
+          let numero7 = value.substring(6, 7) * 2;
+          if (numero7 > 9) numero7 -= 9;
+          let numero9 = value.substring(8, 9) * 2;
+          if (numero9 > 9) numero9 -= 9;
+          const impares = numero1 + numero3 + numero5 + numero7 + numero9;
+          const suma_total = pares + impares;
+          const primer_digito_suma = String(suma_total).substring(0, 1);
+          const decena = (parseInt(primer_digito_suma) + 1) * 10;
+          let digito_validador = decena - suma_total;
+          if (digito_validador === 10) digito_validador = 0;
+
+          if (digito_validador !== parseInt(ultimo_digito)) {
+            toast.dismiss();
+            toast.error('La cédula es incorrecta');
+          }
+        } else {
+          toast.dismiss();
+          toast.error('Esta cédula no pertenece a ninguna región');
+        }
+      }
     }
   };
 
   const handleTelefonoChange = (e) => {
     const value = e.target.value;
-    if (/^\d*$/.test(value)) {
+    if (/^\d*$/.test(value) && value.length <= 10) {
       setTelefono(value);
     }
   };
 
   const handleNombresChange = (e) => {
     const value = e.target.value.toUpperCase();
-    if (/^[A-Z\s]*$/.test(value)) {
+    if (/^[A-ZÑÁÉÍÓÚÜ\s]*$/.test(value)) {
       setNombres(value);
     } else {
       toast.dismiss();
@@ -47,7 +79,7 @@ const App = () => {
 
   const handleApellidosChange = (e) => {
     const value = e.target.value.toUpperCase();
-    if (/^[A-Z\s]*$/.test(value)) {
+    if (/^[A-ZÑÁÉÍÓÚÜ\s]*$/.test(value)) {
       setApellidos(value);
     } else {
       toast.dismiss();
@@ -145,7 +177,7 @@ const App = () => {
         <div className="sidebar-profile">
           <div className="profile-info">
             <span className="profile-name">Admin</span>
-            <span className="profile-email">admin@email.com</span>
+            <span className="profile-email">admin@admin.com</span>
           </div>
           <button className="logout-button" onClick={handleLogout}>
             <FaSignOutAlt className="icon" />
@@ -155,7 +187,7 @@ const App = () => {
       </div>
 
       <div className="form-container">
-        <h2>Nuevo Cliente</h2>
+        <h2>Nuevo Registro</h2>
         <div className="form">
           <form onSubmit={handleSubmit}>
             {/* Fila para Nombres y Apellidos */}

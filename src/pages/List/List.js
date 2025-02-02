@@ -72,7 +72,7 @@ const List = () => {
         <div className="sidebar-profile">
           <div className="profile-info">
             <span className="profile-name">Admin</span>
-            <span className="profile-email">admin@email.com</span>
+            <span className="profile-email">admin@admin.com</span>
           </div>
           <button className="logout-button" onClick={handleLogout}>
             <FaSignOutAlt className="icon" />
@@ -97,7 +97,7 @@ const List = () => {
               <th>Email</th>
               <th>Teléfono</th>
               <th>Cédula</th>
-              <th>Acciones</th>
+              <th>Direcciones</th>
             </tr>
           </thead>
           <tbody>

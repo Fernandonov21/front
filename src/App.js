@@ -39,7 +39,7 @@ function App() {
   return (
     <Routes>
       <Route path="/login" element={<Login onLogin={handleLogin} />} />
-      <Route path="/loginclients" element={<LoginClients onLogin={handleLogin} />} /> {/* Add route for LoginClients component */}
+      <Route path="/loginusers" element={<LoginClients onLogin={handleLogin} />} /> {/* Add route for LoginClients component */}
       <Route path="/dashboard" element={<Dashboard onLogout={handleLogout} />} />
       <Route path="/list" element={<List />} /> {/* Add route for List component */}
       <Route path="/user/:id" element={<UserDetail />} /> {/* Add route for UserDetail component */}

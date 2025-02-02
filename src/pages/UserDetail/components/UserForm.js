@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
@@ -13,11 +13,19 @@ const UserForm = ({
   handleDeleteClick,
   handleCancelEditClick,
 }) => {
+  const [originalUser, setOriginalUser] = useState(user);
+
+  useEffect(() => {
+    if (!isEditing) {
+      setOriginalUser(user);
+    }
+  }, [user, isEditing]);
+
   const handleSave = () => {
     // Validations
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\d{10}$/;
-    const nameRegex = /^[a-zA-Z\s]+$/;
+    const nameRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+$/;
 
     if (!emailRegex.test(user.CorreoElectronico)) {
       toast.error('El formato de correo electrónico es incorrecto o ya existe');
@@ -35,7 +43,7 @@ const UserForm = ({
     }
 
     if (!nameRegex.test(user.Nombres) || !nameRegex.test(user.Apellidos)) {
-      toast.error('El nombre y apellido no deben contener números');
+      toast.error('El nombre y apellido no deben contener números o caracteres especiales');
       return;
     }
 
@@ -54,12 +62,27 @@ const UserForm = ({
   };
 
   const handleInputChange = (e, field) => {
-    const value = e.target.value;
+    let value = e.target.value;
     if (field === 'Cedula' || field === 'TelefonoContacto') {
       if (value.length > 10) return;
       if (!/^\d*$/.test(value)) return;
+    } else if (field === 'Nombres' || field === 'Apellidos') {
+      value = value.toUpperCase();
+      if (!/^[A-ZÑÁÉÍÓÚ\s]*$/.test(value)) return;
     }
     setUser({ ...user, [field]: value });
+  };
+
+  const handleCancel = () => {
+    setUser(originalUser);
+    setPassword('');
+    handleCancelEditClick();
+  };
+
+  const handleEdit = () => {
+    setOriginalUser(user);
+    setPassword('');
+    handleEditClick();
   };
 
   return (
@@ -133,16 +156,13 @@ const UserForm = ({
             <button className="save-button" onClick={handleSave}>
               GUARDAR
             </button>
-            <button className="cancel-button" onClick={handleCancelEditClick}>
+            <button className="cancel-button" onClick={handleCancel}>
               CANCELAR
             </button>
           </>
         ) : (
           <>
-            <button className="edit-button" onClick={() => {
-              setPassword('');
-              handleEditClick();
-            }}>
+            <button className="edit-button" onClick={handleEdit}>
               <FaEdit /> EDITAR
             </button>
             <button className="delete-button" onClick={handleDeleteClick}>
