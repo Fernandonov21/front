@@ -14,6 +14,7 @@ const App = () => {
   const [telefono, setTelefono] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isCedulaValid, setIsCedulaValid] = useState(true);
 
   const handleLogout = () => {
     // Lógica para manejar el logout
@@ -51,11 +52,17 @@ const App = () => {
           if (digito_validador !== parseInt(ultimo_digito)) {
             toast.dismiss();
             toast.error('La cédula es incorrecta');
+            setIsCedulaValid(false);
+          } else {
+            setIsCedulaValid(true);
           }
         } else {
           toast.dismiss();
           toast.error('Esta cédula no pertenece a ninguna región');
+          setIsCedulaValid(false);
         }
+      } else {
+        setIsCedulaValid(true);
       }
     }
   };
@@ -98,8 +105,8 @@ const App = () => {
     }
 
     // Validar longitud de cédula y teléfono
-    if (cedula.length !== 10) {
-      setError('La cédula debe tener 10 dígitos numéricos');
+    if (cedula.length !== 10 || !isCedulaValid) {
+      setError('La cédula es incorrecta');
       return;
     }
 
